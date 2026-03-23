@@ -1,74 +1,40 @@
-# LLM Safety Guard: AI Command Monitoring System
+# AI Command Monitoring System 🛡️
 
-A lightweight security system that monitors and controls AI-generated commands before execution.
+A lightweight AI security system that monitors and filters AI-generated commands to prevent unsafe system operations.
 
-This project simulates a real-world safety layer between an LLM (Large Language Model) and system-level operations, preventing unsafe or high-risk actions.
-
----
-
-## Overview
-
-As LLM-powered agents become more capable of interacting with operating systems and external tools, ensuring safe execution of generated commands is critical.
-
-This project implements a command validation layer that:
-- Interprets AI-generated actions
-- Evaluates risk levels
-- Enforces safety policies before execution
+This project simulates a secure control layer between AI outputs and system execution, inspired by real-world AI safety and cybersecurity challenges.
 
 ---
 
 ## Features
 
-- LLM-driven command interpretation  
-  Converts natural language input into structured actions (mock or API)
-
-- Risk-aware decision engine  
-  Classifies actions into low, medium, high risk levels
-
-- Safety enforcement layer  
-  BLOCKED: dangerous operations (delete, shutdown)  
-  REVIEW: requires manual confirmation  
-  ALLOWED: safe operations  
-
-- Audit logging  
-  Tracks all actions and decisions  
-
-- Dual-mode architecture  
-  mock mode (rule-based)  
-  api mode (LLM-powered)  
+* Detects unsafe commands using rule-based filtering
+* Blocks high-risk operations (e.g., file deletion, system shutdown)
+* Logs all commands for auditing
+* Supports mock AI mode and LLM integration
+* Simple web interface using Flask
 
 ---
 
 ## Example
 
-```bash
-LLM Safety Guard Started  
-Type 'exit' to quit  
+```
+Enter command: delete all files  
+WARNING: Dangerous command detected  
+Blocked  
 
-User Request: delete all files  
-
-[LLM Output] {'action': 'delete_file', 'target': '/Downloads', 'risk_hint': 'high'}  
-[Safety Decision] BLOCKED  
-[Reason] delete_file is considered high-risk  
+Enter command: hello  
+Allowed  
 ```
 
 ---
 
-## System Architecture
+## Tech Stack
 
-```
-User Input
-    ↓
-LLM Agent (mock / API)
-    ↓
-Structured Action (JSON)
-    ↓
-Safety Guard
-    ↓
-Decision: ALLOWED / REVIEW / BLOCKED
-    ↓
-Logger
-```
+* Python
+* Flask
+* Rule-based filtering
+* Logging system
 
 ---
 
@@ -76,46 +42,42 @@ Logger
 
 ```
 ai-command-monitor/
-│── main.py            # Entry point
-│── llm_agent.py       # LLM / mock action generator
-│── safety_guard.py    # Decision engine
-│── rules.py           # Risk rules
-│── logger.py          # Logging system
+│── app.py  
+│── main.py  
+│── llm_agent.py  
+│── safety_guard.py  
+│── rules.py  
+│── logger.py  
+│── run.sh  
 ```
 
 ---
 
 ## How It Works
 
-1. User input is treated as an AI-generated command  
-2. LLM agent converts input into structured JSON action  
-3. Safety guard evaluates the action using predefined rules  
-4. System returns decision: ALLOWED / REVIEW / BLOCKED  
-5. All decisions are logged  
+1. Receive command (simulated AI output)
+2. Analyze intent
+3. Evaluate risk
+4. Block or allow
+5. Log results
 
 ---
 
-## How to Run
+## Run
 
-```bash
-python3 main.py
+```
+./run.sh
 ```
 
----
+Open:
 
-## Future Improvements
-
-- Prompt injection detection  
-- Role-based access control (RBAC)  
-- Sandbox execution environment  
-- Web-based monitoring dashboard  
-- Integration with real-world AI agents  
+```
+http://127.0.0.1:5000
+```
 
 ---
 
 ## Author
 
-Yiru Wang  
-Computer Science @ University of Connecticut  
-
-Focus: AI Security · LLM Safety · Systems
+Yiru Wang
+Computer Science @ UConn
