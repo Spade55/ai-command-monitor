@@ -1,67 +1,97 @@
-# AI Command Monitoring System
+# LLM Safety Guard: AI Command Monitoring System
 
-A simple AI security project that simulates monitoring and controlling AI-generated commands to prevent unsafe system operations.
+A lightweight security system that monitors and controls AI-generated commands before execution.
 
-This project demonstrates how an AI system's outputs can be analyzed and filtered before execution to ensure system safety.
+This project simulates a real-world safety layer between an LLM (Large Language Model) and system-level operations, preventing unsafe or high-risk actions.
+
+---
+
+## Overview
+
+As LLM-powered agents become more capable of interacting with operating systems and external tools, ensuring safe execution of generated commands is critical.
+
+This project implements a command validation layer that:
+- Interprets AI-generated actions
+- Evaluates risk levels
+- Enforces safety policies before execution
 
 ---
 
 ## Features
 
-- **Detects unsafe commands** using rule-based filtering  
-- **Blocks high-risk operations** such as file deletion or system shutdown  
-- **Logs all commands** with timestamps for auditing  
-- **Simulates an AI-to-system command control layer**  
+- LLM-driven command interpretation  
+  Converts natural language input into structured actions (mock or API)
+
+- Risk-aware decision engine  
+  Classifies actions into low, medium, high risk levels
+
+- Safety enforcement layer  
+  BLOCKED: dangerous operations (delete, shutdown)  
+  REVIEW: requires manual confirmation  
+  ALLOWED: safe operations  
+
+- Audit logging  
+  Tracks all actions and decisions  
+
+- Dual-mode architecture  
+  mock mode (rule-based)  
+  api mode (LLM-powered)  
 
 ---
 
 ## Example
 
 ```bash
-AI Command Monitoring System Started  
+LLM Safety Guard Started  
 Type 'exit' to quit  
 
-Enter command: delete all files  
-WARNING: Dangerous command detected!  
-Blocked: delete all files  
+User Request: delete all files  
 
-Enter command: rm -rf  
-WARNING: Dangerous command detected!  
-Blocked: rm -rf  
-
-Enter command: hello  
-Allowed: hello  
+[LLM Output] {'action': 'delete_file', 'target': '/Downloads', 'risk_hint': 'high'}  
+[Safety Decision] BLOCKED  
+[Reason] delete_file is considered high-risk  
 ```
 
 ---
 
-## Tech Stack
+## System Architecture
 
-- Python  
-- Rule-based detection system  
-- Logging system  
+```
+User Input
+    ↓
+LLM Agent (mock / API)
+    ↓
+Structured Action (JSON)
+    ↓
+Safety Guard
+    ↓
+Decision: ALLOWED / REVIEW / BLOCKED
+    ↓
+Logger
+```
 
 ---
 
 ## Project Structure
 
-```text
+```
 ai-command-monitor/
-│── main.py        # Entry point of the system  
-│── monitor.py     # Core monitoring logic  
-│── rules.py       # Security rules and filters  
-│── logger.py      # Logging system  
+│── main.py            # Entry point
+│── llm_agent.py       # LLM / mock action generator
+│── safety_guard.py    # Decision engine
+│── rules.py           # Risk rules
+│── logger.py          # Logging system
 ```
 
 ---
 
 ## How It Works
 
-1. **Receive command** (simulating AI output)  
-2. **Check against predefined security rules**  
-3. If unsafe → **Blocked**  
-4. Otherwise → **Allowed**  
-5. **Log all actions for transparency**  
+1. User input is treated as an AI-generated command  
+2. LLM agent converts input into structured JSON action  
+3. Safety guard evaluates the action using predefined rules  
+4. System returns decision: ALLOWED / REVIEW / BLOCKED  
+5. All decisions are logged  
 
 ---
 
@@ -75,10 +105,11 @@ python3 main.py
 
 ## Future Improvements
 
-- Add machine learning-based detection (instead of rule-based)  
-- Introduce a whitelist system for trusted commands  
-- Build a web interface for real-time monitoring  
-- Integrate with real AI APIs (e.g., OpenAI) for testing  
+- Prompt injection detection  
+- Role-based access control (RBAC)  
+- Sandbox execution environment  
+- Web-based monitoring dashboard  
+- Integration with real-world AI agents  
 
 ---
 
@@ -86,4 +117,5 @@ python3 main.py
 
 Yiru Wang  
 Computer Science @ University of Connecticut  
-Interested in Cybersecurity & AI Security  
+
+Focus: AI Security · LLM Safety · Systems
