@@ -1,4 +1,26 @@
+# ===== Python =====
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# ===== Virtual Environment =====
+.venv/
+venv/
+env/
+
+# ===== Logs =====
 log.txt
+*.log
+
+# ===== Environment Variables =====
+.env
+
+# ===== macOS =====
 .DS_Store
+
+# ===== VS Code =====
+.vscode/
+
+# ===== Others =====
+*.sqlite3

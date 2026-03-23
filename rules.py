@@ -1,15 +1,18 @@
-DANGEROUS_KEYWORDS = [
-    "rm -rf",
-    "delete",
-    "shutdown",
-    "format",
-    "wipe",
-    "kill",
-    "drop database",
-    "truncate",
-    "remove all"
+HIGH_RISK_ACTIONS = [
+    "delete_file",
+    "shutdown_system",
+    "format_disk",
+    "execute_command"
 ]
 
-def is_dangerous(command: str) -> bool:
-    command = command.lower()
-    return any(keyword in command for keyword in DANGEROUS_KEYWORDS)
+MEDIUM_RISK_ACTIONS = [
+    "write_file",
+    "unknown"
+]
+
+PROTECTED_PATHS = [
+    "/System",
+    "/Library",
+    "/Users",
+    "/private"
+]
